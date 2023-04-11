@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import styles from '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator, MessageSeparator, Avatar, Sidebar, Search, ConversationList, Conversation, ConversationHeader, VoiceCallButton, VideoCallButton, EllipsisButton} from '@chatscope/chat-ui-kit-react';
-
+import SpikeSideBar from './SpikeSideBar'
 function Gui() {
     const [messageInputValue, setMessageInputValue] = useState("");
     const [messages, setMessages] = useState([]);
@@ -22,25 +22,13 @@ function Gui() {
   return (
 
     // Set initial message input value to an empty string                                                                     
-
     <div style={{
       height: "600px",
       position: "relative"
     }}>
       <MainContainer responsive>                
-        <Sidebar position="left" scrollable={false}>
-          <Search placeholder="Search..." />
-          <ConversationList>                                                     
-            <Conversation name="Obama" lastSenderName="Obama" info="Want to ask me something?">
-              <Avatar src={'./Obama.jpg'} name="Obama" status="available" />
-            </Conversation>
-            
-            <Conversation name="Trump" lastSenderName="Trump" info="MAKE AMERICA GREAT AGAIN!!">
-              <Avatar src={'./Trump.jpg'} name="Trump" status="dnd" />
-            </Conversation>
-                                        
-          </ConversationList>
-        </Sidebar>
+        {/* Check out SpikeSideBar.js for the sidebar code */}
+        <SpikeSideBar/>
         
         <ChatContainer>
           <ConversationHeader>
@@ -56,6 +44,12 @@ function Gui() {
 
           <MessageList typingIndicator={<TypingIndicator content="Obama is typing" />}>
             <MessageSeparator content="Saturday, 30 November 2019" />
+            <Message model={{
+              message: "This is Obama. What do you want to talk about?",
+              sentTime: "just now",
+              sender: "Obama"
+            }}>
+            </Message>
             {messages.map((m, i) => <Message key={i} model={m} />)}
           </MessageList>
 
@@ -64,11 +58,7 @@ function Gui() {
         </ChatContainer>                         
       </MainContainer>
     </div>
-      
   )
 }
 
 export default Gui
-
-
-
