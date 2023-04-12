@@ -25,3 +25,7 @@ open 2 terminal windows. (ctrl + `)
     - while here, run "npm start".
     This will open your react program in the browser.
 
+Recommended but not required:
+- Install ES7+ React/Redux/React-Native snippets
+    This makes react development a little easier by providing some auto complete snippets.
+    For example, rfce + tab will create a react functional component with export statement. Pretty cool!
