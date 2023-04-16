@@ -7,13 +7,17 @@ const myApiKey = data["apiKey"]
 
 // don't know...
 const express = require('express')
+const cors = require('cors');
 const app = express()
 const serverPort = 5000 // dependency in client/package.json proxy 
+app.use(cors());
 
-app.get("/api", (req, res) => {
-    response = run()
-    console.log("I ran the program")
-    res.send("hi") 
+app.get("/api", async (req, res) => {
+    let text = req.query.param
+    console.log(text)
+    const response = await run(text)
+    console.log(response)
+    res.send(response) 
 })
 
 
@@ -25,12 +29,12 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-async function run() {
+async function run(text) {
     const completion = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
-    messages: [{role: "user", content: "write me a 50 word essay on one piece the anime"}],
+    messages: [{role: "user", content: text}],
     });
-     console.log(completion.data.choices[0].message.content);
+    return completion.data.choices[0].message.content;
 }
 
 // don't know what this is..

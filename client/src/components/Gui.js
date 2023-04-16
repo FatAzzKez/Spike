@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import axios from 'axios'
 import styles from '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator, MessageSeparator, Avatar, Sidebar, Search, ConversationList, Conversation, ConversationHeader, VoiceCallButton, VideoCallButton, EllipsisButton} from '@chatscope/chat-ui-kit-react';
 import SpikeSideBar from './SpikeSideBar'
@@ -10,18 +11,24 @@ function Gui() {
      * Handles the acts of sending a message. Deletes chat bar message and prints to console. Also creates a new message in chat
      * Question: Here, message is an input, but when i call sendMessage, I don't have to specify an input (message). How does it know how to add it?
      */
-    let sendMessage = message => {
+     let sendMessage = async message => {
       setMessages([...messages, {
         message,
         direction: 'outgoing'
       }]);
       setMessageInputValue("")
-      console.log(messages) // why the delay in showing messages?
+      let response = await axios.get(`http://localhost:5000/api?param=${message}`)
+      let someText = response.data
+
+      setMessages([...messages, {
+        someText,
+        direction: "incoming"
+      }]);
     }
 
   return (
 
-    // Set initial message input value to an empty string                                                                     
+    // Set initial message input value to an empty string                                                                    
     <div style={{
       height: "600px",
       position: "relative"
