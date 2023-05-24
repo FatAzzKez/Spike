@@ -29,3 +29,5 @@ Recommended but not required:
 - Install ES7+ React/Redux/React-Native snippets
     This makes react development a little easier by providing some auto complete snippets.
     For example, rfce + tab will create a react functional component with export statement. Pretty cool!
+
+    update to readme for a test
